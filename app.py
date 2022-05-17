@@ -56,7 +56,7 @@ def edit_customers(id):
     
     if request.method == "POST":
         if request.form.get("Edit_Customer"):
-            customerID = request.form["customerID"]
+            id = request.form["customerID"]
             name = request.form["cname"]
             email = request.form["email"]
             phone = request.form["phone"]
@@ -64,8 +64,8 @@ def edit_customers(id):
 
             query = "UPDATE Customers SET name = %s, email = %s, phone_num = %s, address = %s WHERE customerID = %s"
             cur = mysql.connection.cursor()
-            cur.execute(query, (name, email, phone, address))
-            data = cur.fetchall()
+            cur.execute(query, (name, email, phone, address, id))
+            mysql.connection.commit()
 
             return redirect("/customers")
 
