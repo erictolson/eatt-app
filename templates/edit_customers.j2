@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title>Edit Customer</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div>
+        <table border="1" cellpadding="5">
+            <caption> Editing Customer: </caption>
+            <!-- Access data tuple passed from app.py -->
+            {% if data %}
+            <thead>
+                <tr>
+                    <!-- Iterate through each key in the first entry to get the column name -->
+                    {% for key in data[0].keys() %}
+
+                    <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+                    <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+
+                    <!-- End of this for loop -->
+                    {% endfor %}
+                </tr>
+
+            <tbody>
+                <!-- Now, iterate through every item in data -->
+                {% for item in data %}
+                <tr>
+                    <!-- Then iterate through every key in the current item dictionary -->
+                    {% for key in item.keys() %}
+
+                    <!-- Create a <td> element with the value of that key in it -->
+                    <td>{{item[key]}}</td> {% endfor %}
+                </tr>
+                {% endfor %}
+                {% endif %}
+        </table>
+
+        <div id="edit">
+            <!-- form to edit data in bsg_people-->
+            <form id="editCustomers" action="/edit_customers/{{data[0].customerID}}" method="post">
+                <legend><strong>Edit Customer</strong></legend>
+                <fieldset>
+                    <input type="hidden" value="{{data[0].customerID}}" class="form-control" id="customerID"
+                        name="customerID" required>
+
+                    <label for="cname">Customer Name:</label>
+                    <input type="text" class="form-control" id="cname" name="cname" value="{{data[0].name}}" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="{{data[0].email}}" required>
+
+                    <label for="phone">Phone Number:</label>
+                    <input type="number" class="form-control" id="phone" name="phone" value="{{data[0].phone_num}}"
+                        required>
+
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control" id="address" name="address" value="{{data[0].address}}"
+                        required>
+                </fieldset>
+                <input type="submit" value="Edit Customer" name="Edit_Customer" class="btn btn-primary"
+                    style="margin:.5rem;">
+                <a href='/customers'><input class="btn" type="button" value="cancel"></a>
+            </form>
+
+</html>

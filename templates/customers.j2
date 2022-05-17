@@ -1,0 +1,155 @@
+<html>
+<!-- Adapted from the people.html UI design -->
+
+<head>
+	<title>EAAT Customers</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript">
+		function showform(dowhat) {
+			/*
+			 * four DIVS: browse, insert, update, delete
+			 * this function sets one visible the others not
+			 */
+			if (dowhat == 'insert') {
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('edit').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			} else if (dowhat == 'update') {
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('edit').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			} else if (dowhat == 'delete') {
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('edit').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			} else if (dowhat == 'all') {
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('edit').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			} else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('edit').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+
+		function newCustomers() {
+			showform('insert');
+		}
+
+		function updateCustomers(pid) {
+			showform('update');
+		}
+
+		function deleteCustomers(pid) {
+			showform('delete');
+		}
+
+		function browseCustomers() {
+			showform('browse');
+		}
+
+		function showAll() {
+			showform('all');
+		}
+	</script>
+</head>
+
+<body onload="browseCustomers()">
+	<h1>Browse Customers</h1>
+	<div id="browse">
+		<p><a href="#" onClick="newCustomers()">Add Customer</a> </p>
+		<table border="1" cellpadding="5">
+			<!-- Access data tuple passed from app.py -->
+			{% if data %}
+			<thead>
+				<tr>
+					<!-- Iterate through each key in the first entry to get the column name -->
+					{% for key in data[0].keys() %}
+
+					<!-- Create a <th> tag with the key inside of it, this will be our header row -->
+					<th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+
+					<!-- End of this for loop -->
+					{% endfor %}
+				</tr>
+
+			<tbody>
+				<!-- Now, iterate through every item in data -->{% for item in data %}
+				<tr>
+					<!-- Then iterate through every key in the current item dictionary -->
+					{% for key in item.keys() %}
+
+					<!-- Create a <td> element with the value of that key in it -->
+					<td> {{item[key]}} </td>
+					{% endfor %}
+
+					<!-- Create our edit/delete buttons -->
+					<td><a href="edit_customers/{{item.customerID}}" class="btn btn-default">Edit</a></td>
+					<!-- <td><a href="delete_customers/{{item.customerID}}" class="btn btn-default">Delete</a></td> -->
+
+				</tr>
+				{% endfor %}
+				{% endif %}
+		</table>
+		<p>&nbsp;</p>
+	</div> 
+
+	<div id="insert">
+		<!-- form to INSERT new data into Customers-->
+		<form id="insertCustomers" action="/customers" method="post">
+			<legend><strong>Add Customer</strong></legend>
+			<fieldset>
+				<!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
+				<label for="cname">Customer Name:</label>
+				<input type="text" class="form-control" id="cname" name="cname" placeholder="" required>
+
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" id="email" name="email"
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="" required>
+
+				<label for="phone">Phone Number:</label>
+				<input type="number" class="form-control" id="phone" name="phone" placeholder="" required>
+
+				<label for="address">Address:</label>
+				<input type="text" class="form-control" id="address" name="address" placeholder="" required>
+			</fieldset>
+
+			<!-- Create 'Add Customer' and 'Cancel' buttons -->
+			<input type="submit" value="Add Customer" name="Add_Customers" class="btn btn-primary"
+				style="margin:.5rem;">
+			<input class="btn" type="button" value="Cancel" onClick="browseCustomers()">
+		</form>
+	</div>
+
+	<div id="edit">
+		<!-- form to edit data in Customers-->
+		<form id="editCustomers" action="/edit_customers/{{data[0].customerID}}" method="post">
+			<legend><strong>Edit Customer</strong></legend>
+			<fieldset>
+				<input type="hidden" value="{{data[0].customerID}}" class="form-control" id="customerID" name="customerID" required>
+
+				<label for="cname">Customer Name:</label>
+				<input type="text" class="form-control" id="cname" name="cname" placeholder="" required>
+
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" id="email" name="email"
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="" required>
+
+				<label for="phone">Phone Number:</label>
+				<input type="number" class="form-control" id="phone" name="phone" placeholder="" required>
+
+				<label for="address">Address:</label>
+				<input type="text" class="form-control" id="address" name="address" placeholder="" required>
+			</fieldset>
+			<input class="btn" type="button" value="Cancel" onClick="browseCustomers()" style="margin:.5rem;">
+		</form>
+	</div>
+</body>
+
+</html>

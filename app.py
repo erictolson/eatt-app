@@ -44,14 +44,30 @@ def customers():
 
             return redirect("/customers")
 
-@app.route("/delete_customers/<int:id>")
-def delete_customers(id):
-    query = "DELETE FROM Customers WHERE customerID = '%s';"
-    cur = mysql.connection.cursor()
-    cur.execute(query, (id,))
-    mysql.connection.commit()
+@app.route("/edit_customers/<int:id>", methods=["GET", "POST"])
+def edit_customers(id):
+    if request.method == "GET":
+        query = "SELECT * FROM Customers WHERE customerID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
 
-    return redirect("/customers")
+        return render_template("edit_customers.j2", data=data)
+    
+    if request.method == "POST":
+        if request.form.get("Edit_Customer"):
+            customerID = request.form["customerID"]
+            name = request.form["cname"]
+            email = request.form["email"]
+            phone = request.form["phone"]
+            address = request.form["address"]
+
+            query = "UPDATE Customers SET name = %s, email = %s, phone_num = %s, address = %s WHERE customerID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (name, email, phone, address))
+            data = cur.fetchall()
+
+            return redirect("/customers")
 
 @app.route('/discounts', methods=["GET", "POST"])
 def discounts():
