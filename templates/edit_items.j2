@@ -1,0 +1,62 @@
+
+   
+<html>
+
+<head>
+	<title>Edit Items</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div>
+        <table border="1" cellpadding="5"> 
+            <caption> Editing Item: </caption>
+            <!-- Access data tuple passed from app.py -->
+            {% if data %}
+                <thead>
+                    <tr>
+                        <!-- Iterate through each key in the first entry to get the column name -->
+                        {% for key in data[0].keys() %}
+
+                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+                        <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        
+                        <!-- End of this for loop -->
+                        {% endfor %} 
+                    </tr>
+
+                <tbody>
+                    <!-- Now, iterate through every item in data -->
+                    {% for item in data %}
+                    <tr>
+                        <!-- Then iterate through every key in the current item dictionary -->
+                        {% for key in item.keys() %}
+                        
+                        <!-- Create a <td> element with the value of that key in it -->
+                        <td>{{item[key]}}</td> {% endfor %} 
+                    </tr> 
+                    {% endfor %} 
+            {% endif %} 
+        </table>
+
+        <div id="edit">
+            <!-- form to edit data in Items-->
+            <form id="editItem" action="/edit_items/{{data[0].itemID}}" method="post">
+                <legend><strong>Edit Item</strong></legend>
+                <fieldset>
+                    <!-- We can preset form inputs to match attributes currently stored for 'id' of person to be updated via value= and accessing our passed data tuple -->
+                    <!-- Create hidden form input to store the passed 'id' of the person we are editing so we can access it easily in our 'POST' method in our app.py -->
+                    <input type="hidden" value="{{data[0].itemID}}" class="form-control" id="itemID" name="itemID" required>
+
+				    <label for="iname">Name:</label>
+				    <input type="text" class="form-control" id="iname" name="iname" " placeholder="{{data[0].name}}" required>
+
+				    <label for="price">Price:</label>
+				    <input type="number" step="any" class="form-control" id="price" name="price" placeholder="{{data[0].price}}"  required>
+                
+                </fieldset>
+                <input type="submit" value="Edit Item" name="Edit_Item" class="btn btn-primary" style="margin:.5rem;">
+                <a href='/people'><input class="btn" type="button" value="cancel"></a>
+            </form>
+
+</html>

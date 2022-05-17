@@ -1,1 +1,123 @@
 
+   
+<html>
+<!-- Adapted from the people.html UI design -->
+
+<head>
+	<title>EAAT Discounts</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<script language="JavaScript">
+		function showform(dowhat) {
+			/*
+			 * four DIVS: browse, insert, update, delete
+			 * this function sets one visible the others not
+			 */
+			if (dowhat == 'insert') {
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('edit').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			} else if (dowhat == 'update') {
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('edit').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			} else if (dowhat == 'delete') {
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('edit').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			} else if (dowhat == 'all') {
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('edit').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			} else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('edit').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+		function newDiscounts() {
+			showform('insert');
+		}
+		function updateDiscounts(pid) {
+			showform('update');
+		}
+		function deleteDiscounts(pid) {
+			showform('delete');
+		}
+		function browseDiscounts() {
+			showform('browse');
+		}
+		function showAll() {
+			showform('all');
+		}
+	</script>
+</head>
+
+<body onload="browseDiscounts()">
+	<h1>Browse Discounts</h1>
+	<div id="browse">
+		<p><a href="#" onClick="newDiscounts()">Add Discount</a> </p>
+		<table border="1" cellpadding="5">
+			<!-- Access data tuple passed from app.py -->
+			{% if data %}
+			<thead>
+				<tr>
+					<!-- Iterate through each key in the first entry to get the column name -->
+					{% for key in data[0].keys() %}
+
+					<!-- Create a <th> tag with the key inside of it, this will be our header row -->
+					<th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+
+					<!-- End of this for loop -->
+					{% endfor %}
+				</tr>
+
+			<tbody>
+				<!-- Now, iterate through every item in data -->{% for item in data %}
+				<tr>
+					<!-- Then iterate through every key in the current item dictionary -->
+					{% for key in item.keys() %}
+
+					<!-- Create a <td> element with the value of that key in it -->
+					<td> {{item[key]}} </td>
+					{% endfor %}
+
+					<!-- Create our edit/delete buttons -->
+					<td><a href="edit_discounts/{{item.discountID}}" class="btn btn-default">Edit</a></td>
+					<td><a href="delete_discounts/{{item.discountID}}" class="btn btn-default">Delete</a></td>
+
+				</tr>
+				{% endfor %}
+				{% endif %}
+		</table>
+		<p>&nbsp;</p>
+	</div> <!-- browse -->
+
+	<div id="insert">
+		<!-- form to INSERT new data into Discounts-->
+		<form id="insertDiscounts" action="/discounts" method="post">
+			<legend><strong>Add Discount</strong></legend>
+			<fieldset>
+				<!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
+			
+				<label for="code">Code:</label>
+				<input type="text" class="form-control" id="code" name="code" placeholder="" required>
+
+				<label for="percent_off">Percent Off:</label>
+				<input type="number" class="form-control" id="percent_off" name="percent_off" placeholder="" required>
+
+			</fieldset>
+
+			<!-- Create 'Add Discount' and 'Cancel' buttons -->
+			<input type="submit" value="Add Discount" name="Add_Discounts" class="btn btn-primary"
+				style="margin:.5rem;">
+			<input class="btn" type="button" value="Cancel" onClick="browseDiscounts()">
+		</form>
+	</div>
+	<!--insert-->
+
+	
