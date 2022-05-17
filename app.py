@@ -16,9 +16,42 @@ mysql = MySQL(app)
 
 
 # Routes
-@app.route("/")
+@app.route('/')
 def home():
-    return "Hi"
+    return render_template("main.j2")
+
+@app.route('/customers', methods=["GET", "POST"])
+def customers():
+    if request.method == "GET":
+        query = "SELECT * FROM Customers;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        return render_template("customers.j2", data=data)
+
+    if request.method == "POST":
+        if request.form.get("Add_Customers"):
+            name = request.form["cname"]
+            email = request.form["email"]
+            phone = request.form["phone"]
+            address = request.form["address"]
+
+            query = "INSERT INTO Customers (name, email, phone_num, address) VALUES (%s, %s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (name, email, phone, address))
+            mysql.connection.commit()
+
+            return redirect("/customers")
+
+@app.route("/delete_customers/<int:id>")
+def delete_customers(id):
+    query = "DELETE FROM Customers WHERE customerID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query, (id,))
+    mysql.connection.commit()
+
+    return redirect("/customers")
 
 @app.route('/discounts', methods=["GET", "POST"])
 def discounts():
