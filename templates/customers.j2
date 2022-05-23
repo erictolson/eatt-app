@@ -62,15 +62,21 @@
 
 <body onload="browseCustomers()">
 	<nav>
-        <a href="/">Homepage</a>
-        <a href="orders">Orders</a>
-        <a href="customers">Customers</a>
-        <a href="drivers">Drivers</a>
-        <a href="items">Items</a>
-        <a href="discounts">Discounts</a>
-        <a href="order_items">Order Items</a>
-    </nav>
+		<a href="/">Homepage</a>
+		<a href="orders">Orders</a>
+		<a href="customers">Customers</a>
+		<a href="drivers">Drivers</a>
+		<a href="items">Items</a>
+		<a href="discounts">Discounts</a>
+		<a href="order_items">Order Items</a>
+	</nav>
 	<h1>Browse Customers</h1>
+	<div>
+		<form action='' method='get'>
+			<input id='search' name='search' type='text' placeholder='Search Customers' aria-label='Search'>
+			<button type='submit'>Search</button>
+		</form>
+	</div>
 	<div id="browse">
 		<p><a href="#" onClick="newCustomers()">Add Customer</a> </p>
 		<table border="1" cellpadding="5">
@@ -107,7 +113,7 @@
 				{% endif %}
 		</table>
 		<p>&nbsp;</p>
-	</div> 
+	</div>
 
 	<div id="insert">
 		<!-- form to INSERT new data into Customers-->
@@ -141,7 +147,8 @@
 		<form id="editCustomers" action="/edit_customers/{{data[0].customerID}}" method="post">
 			<legend><strong>Edit Customer</strong></legend>
 			<fieldset>
-				<input type="hidden" value="{{data[0].customerID}}" class="form-control" id="customerID" name="customerID" required>
+				<input type="hidden" value="{{data[0].customerID}}" class="form-control" id="customerID"
+					name="customerID" required>
 
 				<label for="cname">Customer Name:</label>
 				<input type="text" class="form-control" id="cname" name="cname" placeholder="" required>
