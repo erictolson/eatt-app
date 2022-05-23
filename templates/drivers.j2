@@ -85,26 +85,21 @@
 					{% endfor %}
 
 					<!-- Create our edit/delete buttons -->
-					<td><a href="edit_drivers/{{item.driverID}}" class="btn btn-default">Edit</a></td>
-					<td><a href="delete_drivers/{{item.driverID}}" class="btn btn-default">Delete</a></td>
 
 				</tr>
 				{% endfor %}
 				{% endif %}
 		</table>
 		<p>&nbsp;</p>
-	</div> <!-- browse -->
+	</div>
 
 	<div id="insert">
 		<!-- form to INSERT new data into Drivers-->
 		<form id="insertDrivers" action="/drivers" method="post">
 			<legend><strong>Add Driver</strong></legend>
 			<fieldset>
-				<!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
-			
 				<label for="dname">Name:</label>
 				<input type="text" class="form-control" id="dname" name="dname" placeholder="" required>
-
 			</fieldset>
 
 			<!-- Create 'Add Driver' and 'Cancel' buttons -->
@@ -113,4 +108,3 @@
 			<input class="btn" type="button" value="Cancel" onClick="browseDrivers()">
 		</form>
 	</div>
-	<!--insert-->

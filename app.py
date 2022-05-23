@@ -109,9 +109,9 @@ def drivers():
         if request.form.get("Add_Drivers"):
             name = request.form["dname"]
 
-            query = "INSERT INTO Drivers (name) VALUES (%s)" % name
+            query = "INSERT INTO Drivers (name) VALUES (%s)"
             cur = mysql.connection.cursor()
-            cur.execute(query, (name))
+            cur.execute(query, (name,))
             mysql.connection.commit()
 
             return redirect("/drivers")
@@ -138,7 +138,6 @@ def items():
             mysql.connection.commit()
 
             return redirect("/items")
-
 
 
 @app.route("/delete_items/<int:id>")
@@ -180,7 +179,7 @@ def edit_items(id):
 @app.route('/order_items', methods=["GET", "POST"])
 def order_items():
     if request.method == "GET":
-        query = "SELECT * FROM Order_Items;"
+        query = "SELECT orderID, itemID, unit_price, quantity, line_price FROM Order_Items;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
@@ -231,4 +230,4 @@ def edit_order_items(id):
 # Listener
 # change the port number if deploying on the flip servers
 if __name__ == "__main__":
-    app.run(port=8659, debug=True)
+    app.run(port=1995, debug=True)
