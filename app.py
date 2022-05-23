@@ -20,6 +20,7 @@ mysql = MySQL(app)
 def home():
     return render_template("main.j2")
 
+
 @app.route('/customers', methods=["GET", "POST"])
 def customers():
     if request.method == "GET":
@@ -43,6 +44,7 @@ def customers():
             mysql.connection.commit()
 
             return redirect("/customers")
+
 
 @app.route("/edit_customers/<int:id>", methods=["GET", "POST"])
 def edit_customers(id):
@@ -68,6 +70,7 @@ def edit_customers(id):
             mysql.connection.commit()
 
             return redirect("/customers")
+
 
 @app.route('/discounts', methods=["GET", "POST"])
 def discounts():
@@ -137,6 +140,7 @@ def items():
             return redirect("/items")
 
 
+
 @app.route("/delete_items/<int:id>")
 def delete_items(id):
     query = "DELETE FROM Items WHERE itemID = '%s';"
@@ -172,8 +176,9 @@ def edit_items(id):
 
             return redirect("/items")
 
+
 @app.route('/order_items', methods=["GET", "POST"])
-def customers():
+def order_items():
     if request.method == "GET":
         query = "SELECT * FROM Order_Items;"
         cur = mysql.connection.cursor()
@@ -196,6 +201,7 @@ def customers():
             mysql.connection.commit()
 
             return redirect("/order_items")
+
 
 @app.route("/edit_order_items/<int:id>", methods=["GET", "POST"])
 def edit_order_items(id):
