@@ -32,6 +32,15 @@ def customers():
         return render_template("customers.j2", data=data)
 
     if request.method == "POST":
+        if request.form.get("search"):
+            search = request.form["search"].lower()
+            query = '%' + search + '%'
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT * FROM Customers WHERE name LIKE %s", (query,))
+            data = cur.fetchall()
+
+            return render_template("customers.j2", data=data)
+
         if request.form.get("Add_Customers"):
             name = request.form["cname"]
             email = request.form["email"]
