@@ -100,10 +100,10 @@
 	</div>
 	<div id="browse">
 		<p><a href="#" onClick="newCustomers()">Add Customer</a> </p>
-		<table border="1" cellpadding="5">
 			<!-- Access data tuple passed from app.py -->
 			{% if data %}
-			<thead>
+			<table class="table table-striped">
+  				<thead class="thead-dark">
 				<tr>
 					<!-- Iterate through each key in the first entry to get the column name -->
 					{% for key in data[0].keys() %}
@@ -113,6 +113,7 @@
 
 					<!-- End of this for loop -->
 					{% endfor %}
+					<th></th>
 				</tr>
 
 			<tbody>
@@ -124,7 +125,6 @@
 					<!-- Create a <td> element with the value of that key in it -->
 					<td> {{item[key]}} </td>
 					{% endfor %}
-
 					<!-- Create our edit/delete buttons -->
 					<td><a href="edit_customers/{{item.customerID}}" class="btn btn-default">Edit</a></td>
 					<!-- <td><a href="delete_customers/{{item.customerID}}" class="btn btn-default">Delete</a></td> -->
