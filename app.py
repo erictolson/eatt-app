@@ -230,4 +230,4 @@ def edit_order_items(id):
 # Listener
 # change the port number if deploying on the flip servers
 if __name__ == "__main__":
-    app.run(port=1995, debug=True)
+    app.run(port=8659, debug=True)
