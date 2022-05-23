@@ -147,23 +147,17 @@ def delete_items(id):
     return redirect("/items")
 
 
-# route for edit functionality, updating the attributes of a person in bsg_people
-# similar to our delete route, we want to the pass the 'id' value of that person on button click (see HTML) via the route
 @app.route("/edit_items/<int:id>", methods=["POST", "GET"])
 def edit_items(id):
     if request.method == "GET":
-        # mySQL query to grab the info of the person with our passed id
         query = "SELECT * FROM Items WHERE itemID = %s" % (id)
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
 
-        # render edit_people page passing our query data and homeworld data to the edit_people template
         return render_template("edit_items.j2", data=data)
 
-    # meat and potatoes of our update functionality
     if request.method == "POST":
-        # fire off if user clicks the 'Edit Item' button
         if request.form.get("Edit_Item"):
             # grab user form inputs
             id = request.form["itemID"]
@@ -176,10 +170,57 @@ def edit_items(id):
             cur.execute(query, (name, price, id))
             mysql.connection.commit()
 
-            # redirect back to people page after we execute the update query
             return redirect("/items")
 
+@app.route('/order_items', methods=["GET", "POST"])
+def customers():
+    if request.method == "GET":
+        query = "SELECT * FROM Order_Items;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
 
+        return render_template("order_items.j2", data=data)
+
+    if request.method == "POST":
+        if request.form.get("Add_Order_Items"):
+            orderID = request.form["orderID"]
+            itemID = request.form["itemID"]
+            unit_price = request.form["unit_price"]
+            quantity = request.form["quantity"]
+            line_price = request.form["line_price"]
+
+            query = "INSERT INTO Order_Items (orderID, itemID, unit_price, quantity, line_price) VALUES (%s, %s, %s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (orderID, itemID, unit_price, quantity, line_price))
+            mysql.connection.commit()
+
+            return redirect("/order_items")
+
+@app.route("/edit_order_items/<int:id>", methods=["GET", "POST"])
+def edit_order_items(id):
+    if request.method == "GET":
+        query = "SELECT * FROM Order_Items WHERE orderID = %s" % (id)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        return render_template("edit_order_items.j2", data=data)
+    
+    if request.method == "POST":
+        if request.form.get("Edit_Order_Items"):
+            orderID = request.form["orderID"]
+            itemID = request.form["itemID"]
+            unit_price = request.form["unit_price"]
+            quantity = request.form["quantity"]
+            line_price = request.form["line_price"]
+
+            query = "UPDATE Order_Items SET orderID = %s, itemID = %s, unit_price = %s, quantity = %s, line_price = %s WHERE orderID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (orderID, itemID, unit_price, quantity, line_price, orderID))
+            mysql.connection.commit()
+
+            return redirect("/order_items")
 
 # Listener
 # change the port number if deploying on the flip servers
