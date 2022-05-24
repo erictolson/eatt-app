@@ -47,10 +47,44 @@
                     <input type="hidden" value="{{data[0].orderitemID}}" class="form-control" id="orderitemID"
                         name="orderitemID" required>
 
+                    <label for="order">Order:</label>
+                    <select name="order" id="order" class="form-control" placeholder="" required>
+                        <option value="{{ data[0].orderID }}" selected>{{ data[0].orderID }}</option>
+                        {% set ordersList = [] %}
+                        {{ ordersList.append(data[0].orderID) }}
+                        {% for item in order_data if item.orderID not in ordersList %}
+                        {{ ordersList.append(item.orderID) }}
+                        <option value="{{ item.orderID }}">{{ item.orderID }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="item">Item:</label>
+                    <select name="item" id="item" class="form-control" placeholder="" required>
+                        <option value="{{ data[0].itemID }}" selected>{{ data[0].name }}</option>
+                        {% set itemList = [] %}
+                        {{ itemList.append(data[0].itemID) }}
+                        {% for item in item_data if item.itemID not in itemList %}
+                        {{ itemList.append(item.itemID) }}
+                        <option value="{{ item.itemID }}">{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="unitprice">Unit Price:</label>
+                    <input type="number" class="form-control" id="unitprice" name="unitprice"
+                        value="{{data[0].unit_price}}" placeholder="" required>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" value="{{data[0].quantity}}"
+                        placeholder="" required>
+
+                    <label for="linetotal">Line Total:</label>
+                    <input type="number" class="form-control" id="linetotal" name="linetotal"
+                        value="{{data[0].line_price}}" placeholder="" required>
+
                 </fieldset>
                 <input type="submit" value="Edit Order Item" name="Edit_Order_Items" class="btn btn-primary"
                     style="margin:.5rem;">
-                <a href='/order_items'><input class="btn" type="button" value="cancel"></a>
+                <a href='/order_items'><input class="btn" type="button" value="Cancel"></a>
             </form>
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
                 integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

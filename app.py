@@ -284,15 +284,16 @@ def edit_order_items(id):
     
     if request.method == "POST":
         if request.form.get("Edit_Order_Items"):
-            orderID = request.form["orderID"]
-            itemID = request.form["itemID"]
-            unit_price = request.form["unit_price"]
+            orderitemID = request.form["orderitemID"]
+            orderID = request.form["order"]
+            itemID = request.form["item"]
+            unit_price = request.form["unitprice"]
             quantity = request.form["quantity"]
-            line_price = request.form["line_price"]
+            line_price = request.form["linetotal"]
 
-            query = "UPDATE Order_Items SET orderID = %s, itemID = %s, unit_price = %s, quantity = %s, line_price = %s WHERE orderID = %s"
+            query = "UPDATE Order_Items SET orderID = %s, itemID = %s, unit_price = %s, quantity = %s, line_price = %s WHERE orderitemID = %s"
             cur = mysql.connection.cursor()
-            cur.execute(query, (orderID, itemID, unit_price, quantity, line_price, orderID))
+            cur.execute(query, (orderID, itemID, unit_price, quantity, line_price, orderitemID))
             mysql.connection.commit()
 
             return redirect("/order_items")

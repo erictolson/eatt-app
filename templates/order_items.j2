@@ -181,6 +181,33 @@
                 <input type="hidden" value="{{data[0].orderitemID}}" class="form-control" id="orderitemID"
                     name="orderitemID" required>
 
+                <label for="order">Order:</label>
+                <select name="order" id="order" class="form-control" placeholder="" required>
+                    {% set ordersList = [] %}
+                    {% for item in order_data if item.orderID not in ordersList %}
+                    {{ ordersList.append(item.orderID) }}
+                    <option value="{{ item.orderID }}">{{ item.orderID }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="item">Item:</label>
+                <select name="item" id="item" class="form-control" placeholder="" required>
+                    {% set itemList = [] %}
+                    {% for item in item_data if item.name not in itemList %}
+                    {{ itemList.append(item.name) }}
+                    <option value="{{ item.itemID }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="unitprice">Unit Price:</label>
+                <input type="number" class="form-control" id="unitprice" name="unitprice" placeholder="" required>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="" required>
+
+                <label for="linetotal">Line Total:</label>
+                <input type="number" class="form-control" id="linetotal" name="linetotal" placeholder="" required>
+
             </fieldset>
             <input class="btn" type="button" value="Cancel" onClick="browseOrderItems()" style="margin:.5rem;">
         </form>
