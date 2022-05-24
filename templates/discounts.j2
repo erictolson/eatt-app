@@ -2,7 +2,8 @@
 <!-- Adapted from the people.html UI design -->
 
 <head>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>EATT Discounts</title>
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<script language="JavaScript">
@@ -57,34 +58,35 @@
 </head>
 
 <body onload="browseDiscounts()">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">EATT Ordering</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/orders">Orders</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/customers">Customers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/drivers">Drivers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/items">Items</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/discounts">Discoumts</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/order_items">Order Items</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">EATT Ordering</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/orders">Orders</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/customers">Customers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/drivers">Drivers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/items">Items</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/discounts">Discounts</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/order_items">Order Items</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
 	<h1>Browse Discounts</h1>
 	<div id="browse">
@@ -93,32 +95,32 @@
 			<!-- Access data tuple passed from app.py -->
 			{% if data %}
 			<table class="table table-striped">
-  				<thead class="thead-dark">
-				<tr>
-					<!-- Iterate through each key in the first entry to get the column name -->
-					{% for key in data[0].keys() %}
+				<thead class="thead-dark">
+					<tr>
+						<!-- Iterate through each key in the first entry to get the column name -->
+						{% for key in data[0].keys() %}
 
-					<!-- Create a <th> tag with the key inside of it, this will be our header row -->
-					<th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+						<!-- Create a <th> tag with the key inside of it, this will be our header row -->
+						<th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
 
-					<!-- End of this for loop -->
+						<!-- End of this for loop -->
+						{% endfor %}
+					</tr>
+
+				<tbody>
+					<!-- Now, iterate through every item in data -->{% for item in data %}
+					<tr>
+						<!-- Then iterate through every key in the current item dictionary -->
+						{% for key in item.keys() %}
+
+						<!-- Create a <td> element with the value of that key in it -->
+						<td> {{item[key]}} </td>
+						{% endfor %}
+					</tr>
 					{% endfor %}
-				</tr>
-
-			<tbody>
-				<!-- Now, iterate through every item in data -->{% for item in data %}
-				<tr>
-					<!-- Then iterate through every key in the current item dictionary -->
-					{% for key in item.keys() %}
-
-					<!-- Create a <td> element with the value of that key in it -->
-					<td> {{item[key]}} </td>
-					{% endfor %}
-				</tr>
-				{% endfor %}
-				{% endif %}
-		</table>
-		<p>&nbsp;</p>
+					{% endif %}
+			</table>
+			<p>&nbsp;</p>
 	</div> <!-- browse -->
 
 	<div id="insert">
@@ -127,7 +129,7 @@
 			<legend><strong>Add Discount</strong></legend>
 			<fieldset>
 				<!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
-			
+
 				<label for="code">Code:</label>
 				<input type="text" class="form-control" id="code" name="code" placeholder="" required>
 
@@ -142,8 +144,15 @@
 			<input class="btn" type="button" value="Cancel" onClick="browseDiscounts()">
 		</form>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 </body>
+
 </html>
