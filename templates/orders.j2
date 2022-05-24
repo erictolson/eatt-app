@@ -2,164 +2,217 @@
 <!-- Adapted from the people.html UI design -->
 
 <head>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>EATT Orders</title>
-	<link href="style.css" rel="stylesheet" type="text/css" />
-	<script language="JavaScript">
-		function showform(dowhat) {
-			/*
-			 * four DIVS: browse, insert, update, delete
-			 * this function sets one visible the others not
-			 */
-			if (dowhat == 'insert') {
-				document.getElementById('browse').style.display = 'none';
-				document.getElementById('insert').style.display = 'block';
-				document.getElementById('edit').style.display = 'none';
-				document.getElementById('delete').style.display = 'none';
-			} else if (dowhat == 'update') {
-				document.getElementById('browse').style.display = 'none';
-				document.getElementById('insert').style.display = 'none';
-				document.getElementById('edit').style.display = 'block';
-				document.getElementById('delete').style.display = 'none';
-			} else if (dowhat == 'delete') {
-				document.getElementById('browse').style.display = 'none';
-				document.getElementById('insert').style.display = 'none';
-				document.getElementById('edit').style.display = 'none';
-				document.getElementById('delete').style.display = 'block';
-			} else if (dowhat == 'all') {
-				document.getElementById('browse').style.display = 'block';
-				document.getElementById('insert').style.display = 'block';
-				document.getElementById('edit').style.display = 'block';
-				document.getElementById('delete').style.display = 'block';
-			} else { //by default display browse
-				document.getElementById('browse').style.display = 'block';
-				document.getElementById('insert').style.display = 'none';
-				document.getElementById('edit').style.display = 'none';
-				document.getElementById('delete').style.display = 'none';
-			}
-		}
-		function newOrders() {
-			showform('insert');
-		}
-		function updateOrders(pid) {
-			showform('update');
-		}
-		function deleteOrders(pid) {
-			showform('delete');
-		}
-		function browseOrders() {
-			showform('browse');
-		}
-		function showAll() {
-			showform('all');
-		}
-	</script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>EAAT Order Items</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script language="JavaScript">
+        function showform(dowhat) {
+            /*
+             * four DIVS: browse, insert, update, delete
+             * this function sets one visible the others not
+             */
+            if (dowhat == 'insert') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            } else if (dowhat == 'update') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            } else if (dowhat == 'delete') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            } else if (dowhat == 'all') {
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('edit').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            } else { //by default display browse
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+
+        function newOrders() {
+            showform('insert');
+        }
+
+        function updateOrders(pid) {
+            showform('update');
+        }
+
+        function deleteOrders(pid) {
+            showform('delete');
+        }
+
+        function browseOrders() {
+            showform('browse');
+        }
+
+        function showAll() {
+            showform('all');
+        }
+    </script>
 </head>
 
-<body onload="browseDrivers()">
-	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">EATT Ordering</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/orders">Orders</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/customers">Customers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/drivers">Drivers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/items">Items</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/discounts">Discounts</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/order_items">Order Items</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-	<h1>Browse Orders</h1>
-	<div id="browse">
-		<p><a href="#" onClick="newOrders()">Add Order</a> </p>
-		<table border="1" cellpadding="5">
-			<!-- Access data tuple passed from app.py -->
-			{% if data %}
-			<table class="table table-striped">
-  				<thead class="thead-dark">
-				<tr>
-					<!-- Iterate through each key in the first entry to get the column name -->
-					{% for key in data[0].keys() %}
+<body onload="browseOrders()">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">EATT Ordering</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/orders">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/customers">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/drivers">Drivers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/items">Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/discounts">Discounts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/order_items">Order Items</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Browse Orders</h1>
+    <div id="browse">
+        <p><a href="#" onClick="newOrders()">Add Orders</a> </p>
+        <table border="1" cellpadding="5">
+            <!-- Access data tuple passed from app.py -->
+            {% if data %}
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- Iterate through each key in the first entry to get the column name -->
+                        {% for key in data[0].keys() %}
 
-					<!-- Create a <th> tag with the key inside of it, this will be our header row -->
-					<th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+                        <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
 
-					<!-- End of this for loop -->
-					{% endfor %}
-					<th></th>
-					<th></th>
-				</tr>
+                        <!-- End of this for loop -->
+                        {% endfor %}
+                        <th></th>
+                        <th></th>
+                    </tr>
 
-			<tbody>
-				<!-- Now, iterate through every item in data -->{% for item in data %}
-				<tr>
-					<!-- Then iterate through every key in the current item dictionary -->
-					{% for key in item.keys() %}
+                <tbody>
+                    <!-- Now, iterate through every item in data -->{% for item in data %}
+                    <tr>
+                        <!-- Then iterate through every key in the current item dictionary -->
+                        {% for key in item.keys() %}
 
-					<!-- Create a <td> element with the value of that key in it -->
-					<td> {{item[key]}} </td>
-					{% endfor %}
-				</tr>
-				{% endfor %}
-				{% endif %}
-		</table>
-		<p>&nbsp;</p>
-	</div>  <!-- browse -->
+                        <!-- Create a <td> element with the value of that key in it -->
+                        <td> {{item[key]}} </td>
+                        {% endfor %}
 
-	<div id="insert">
-		<!-- form to INSERT new data into Orders-->
-		<form id="insertOrders" action="/orders" method="post">
-			<legend><strong>Add Order</strong></legend>
-			<fieldset>
-				<!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
-			
-				<label for="order_total">Order Total:</label>
-				<input type="number" step="any" class="form-control" id="order_total" name="order_total" placeholder="" required>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+            </table>
+            <p>&nbsp;</p>
+    </div>
 
-				<label for="is_delivery">Is Delivery:</label>
-				<input type="number" class="form-control" id="is_delivery" name="is_delivery" placeholder="" required>
+    <div id="insert">
+        <!-- form to INSERT new data into Orders-->
+        <form id="insertOrders" action="/orders" method="post">
+            <legend><strong>Add Orders</strong></legend>
+            <fieldset>
+                
+				<label for="ordertotal">Order Total:</label>
+                <input type="number" class="form-control" id="ordertotal" name="ordertotal" placeholder="" required>
 
-                <label for="customerID">Customer ID:</label>
-				<input type="number" class="form-control" id="customerID" name="customerID" placeholder="" required>
+				<label for="isdelivery">Delivery:</label>
+                <input type="number" class="form-control" id="isdelivery" name="isdelivery" placeholder="" required>
 
-                <label for="driverID">Driver ID:</label>
-				<input type="number" class="form-control" id="driverID" name="driverID" placeholder="" required>
+				<label for="customerid">Customer ID:</label>
+                <select name="customerid" id="customerid" class="form-control" placeholder="" required>
+                    {% set customerList = [] %}
+                    {% for item in customers if item.customerID not in customerList %}
+                    {{ customerList.append(item.customerID) }}
+                    <option value="{{ item.customerID }}">{{ item.customerID }}</option>
+                    {% endfor %}
+                </select>
 
-                <label for="discountID">Discount ID:</label>
-				<input type="number" class="form-control" id="discountID" name="discountID" placeholder="" required>
+				<label for="driverid">Driver ID:</label>
+                <select name="driverid" id="driverid" class="form-control" placeholder="" required>
+                    {% set driverList = [] %}
+                    {% for item in drivers if item.driverID not in driverList %}
+                    {{ driverList.append(item.driverID) }}
+                    <option value="{{item.driverID}}">{{ item.driverID }}</option>
+                    {% endfor %}
+                </select>
 
-                <label for="credit_card">Discount ID:</label>
-				<input type="number" class="form-control" id="credit_card" name="credit_card" placeholder="" required>
+				<label for="discountid">Discount ID:</label>
+                <select name="discountid" id="discountid" class="form-control" placeholder="" required>
+                    {% set discountList = [] %}
+                    {% for item in discounts if item.discountID not in discountList %}
+                    {{ discountList.append(item.discountID) }}
+                    <option value="{{ item.discountID }}">{{ item.discountID }}</option>
+                    {% endfor %}
+                </select>
 
-			</fieldset>
+                <label for="creditcard">Credit Card:</label>
+                <input type="number" class="form-control" id="creditcard" name="creditcard" placeholder="" required>
+            </fieldset>
 
-			<!-- Create 'Add Order' and 'Cancel' buttons -->
-			<input type="submit" value="Add Order" name="Add_Orders" class="btn btn-primary"
-				style="margin:.5rem;">
-			<input class="btn" type="button" value="Cancel" onClick="browseOrders()">
-		</form>
-	</div>
-	<!--insert-->
+            <!-- Create 'Add Order' and 'Cancel' buttons -->
+            <input type="submit" value="Add Order" name="Add_Orders" class="btn btn-primary"
+                style="margin:.5rem;">
+            <input class="btn" type="button" value="Cancel" onClick="browseOrders()">
+        </form>
+    </div>
 
+    <div id="edit">
+        <!-- form to edit data in Customers-->
+        <form id="editCustomers" action="/edit_customers/{{data[0].customerID}}" method="post">
+            <legend><strong>Edit Customer</strong></legend>
+            <fieldset>
+                <input type="hidden" value="{{data[0].customerID}}" class="form-control" id="customerID"
+                    name="customerID" required>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                <label for="cname">Customer Name:</label>
+                <input type="text" class="form-control" id="cname" name="cname" placeholder="" required>
+
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="number" class="form-control" id="phone" name="phone" placeholder="" required>
+
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="" required>
+            </fieldset>
+            <input class="btn" type="button" value="Cancel" onClick="browseCustomers()" style="margin:.5rem;">
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

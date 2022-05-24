@@ -193,7 +193,24 @@ def orders():
         cur.execute(query)
         data = cur.fetchall()
 
-        return render_template("orders.j2", data=data)
+        query2 = "SELECT * FROM Customers"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        customer_data = cur.fetchall()
+
+        query3 = "SELECT * FROM Drivers"
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        driver_data = cur.fetchall()
+
+        query4 = "SELECT * FROM Discounts"
+        cur = mysql.connection.cursor()
+        cur.execute(query4)
+        discount_data = cur.fetchall()
+
+        return render_template("orders.j2", data=data, customers=customer_data, drivers=driver_data, discounts=discount_data)
+    
+   
 
     
 
@@ -251,4 +268,4 @@ def edit_order_items(id):
 
 
 if __name__ == "__main__":
-    app.run(port=1995, debug=True)
+    app.run(port=8659, debug=True)
