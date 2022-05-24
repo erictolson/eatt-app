@@ -171,7 +171,6 @@ def edit_items(id):
 
     if request.method == "POST":
         if request.form.get("Edit_Item"):
-            # grab user form inputs
             id = request.form["itemID"]
             name = request.form["iname"]
             price = request.form["price"]
@@ -209,7 +208,23 @@ def orders():
         discount_data = cur.fetchall()
 
         return render_template("orders.j2", data=data, customers=customer_data, drivers=driver_data, discounts=discount_data)
-        
+    
+    if request.method == "POST":
+        if request.form.get("Add_Orders"):
+            order_total = request.form["ordertotal"]
+            is_delivery = request.form["isdelivery"]
+            customerID = request.form["customerid"]
+            driverID = request.form["driverid"]
+            discountID = request.form["discountid"]
+            credit_card = request.form["creditcard"]
+
+            query = "INSERT INTO Orders (order_total, is_delivery, customerID, driverID, discountID, credit_card) VALUES (%s, %s, %s, %s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (order_total, is_delivery, customerID, driverID, discountID, credit_card))
+            mysql.connection.commit()
+
+            return redirect("/orders")
+
 
 @app.route('/order_items', methods=["GET", "POST"])
 def order_items():
