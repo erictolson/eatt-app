@@ -209,10 +209,8 @@ def orders():
         discount_data = cur.fetchall()
 
         return render_template("orders.j2", data=data, customers=customer_data, drivers=driver_data, discounts=discount_data)
-=======
         
 
->>>>>>> 0ac259e884abc7b0107e5a0eb88b03c44ce147f3
 @app.route('/order_items', methods=["GET", "POST"])
 def order_items():
     if request.method == "GET":
