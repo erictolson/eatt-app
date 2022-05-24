@@ -135,15 +135,15 @@
     </div>
 
     <div id="insert">
-        <!-- form to INSERT new data into Customers-->
         <form id="insertOrderItems" action="/order_items" method="post">
             <legend><strong>Add Order Items</strong></legend>
             <fieldset>
+
                 <label for="order">Order:</label>
                 <select name="order" id="order" class="form-control" placeholder="" required>
-                    {% set orderList = [] %}
-                    {% for item in data if item.orderID not in orderList %}
-                    {{ orderList.append(item.orderID) }}
+                    {% set ordersList = [] %}
+                    {% for item in order_data if item.orderID not in ordersList %}
+                    {{ ordersList.append(item.orderID) }}
                     <option value="{{ item.orderID }}">{{ item.orderID }}</option>
                     {% endfor %}
                 </select>
@@ -151,7 +151,7 @@
                 <label for="item">Item:</label>
                 <select name="item" id="item" class="form-control" placeholder="" required>
                     {% set itemList = [] %}
-                    {% for item in data if item.name not in itemList %}
+                    {% for item in item_data if item.name not in itemList %}
                     {{ itemList.append(item.name) }}
                     <option value="{{ item.itemID }}">{{ item.name }}</option>
                     {% endfor %}
@@ -175,27 +175,14 @@
     </div>
 
     <div id="edit">
-        <!-- form to edit data in Customers-->
-        <form id="editCustomers" action="/edit_customers/{{data[0].customerID}}" method="post">
-            <legend><strong>Edit Customer</strong></legend>
+        <form id="editOrderItems" action="/edit_order_items/{{data[0].orderitemID}}" method="post">
+            <legend><strong>Edit Order Items</strong></legend>
             <fieldset>
-                <input type="hidden" value="{{data[0].customerID}}" class="form-control" id="customerID"
-                    name="customerID" required>
+                <input type="hidden" value="{{data[0].orderitemID}}" class="form-control" id="orderitemID"
+                    name="orderitemID" required>
 
-                <label for="cname">Customer Name:</label>
-                <input type="text" class="form-control" id="cname" name="cname" placeholder="" required>
-
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="" required>
-
-                <label for="phone">Phone Number:</label>
-                <input type="number" class="form-control" id="phone" name="phone" placeholder="" required>
-
-                <label for="address">Address:</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="" required>
             </fieldset>
-            <input class="btn" type="button" value="Cancel" onClick="browseCustomers()" style="margin:.5rem;">
+            <input class="btn" type="button" value="Cancel" onClick="browseOrderItems()" style="margin:.5rem;">
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
