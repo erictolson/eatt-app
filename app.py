@@ -185,6 +185,19 @@ def edit_items(id):
             return redirect("/items")
 
 
+@app.route('/orders', methods=["GET", "POST"])
+def orders():
+     if request.method == "GET":
+        query = "SELECT * FROM Orders;"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        return render_template("orders.j2", data=data)
+
+    
+
+
 @app.route('/order_items', methods=["GET", "POST"])
 def order_items():
     if request.method == "GET":
@@ -236,7 +249,6 @@ def edit_order_items(id):
 
             return redirect("/order_items")
 
-# Listener
-# change the port number if deploying on the flip servers
+
 if __name__ == "__main__":
     app.run(port=8659, debug=True)
