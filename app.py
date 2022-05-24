@@ -234,7 +234,17 @@ def order_items():
         cur.execute(query)
         data = cur.fetchall()
 
-        return render_template("order_items.j2", data=data)
+        query2 = "SELECT * FROM Orders"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        order_data = cur.fetchall()
+
+        query3 = "SELECT * FROM Items"
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        item_data = cur.fetchall()
+
+        return render_template("order_items.j2", data=data, order_data=order_data, item_data=item_data)
 
     if request.method == "POST":
         if request.form.get("Add_Order_Items"):
