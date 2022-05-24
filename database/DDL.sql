@@ -73,11 +73,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Order_Items` ;
 
 CREATE TABLE IF NOT EXISTS `Order_Items` (
+  `orderitemID` INT NOT NULL AUTO_INCREMENT,
   `quantity` INT NOT NULL,
   `orderID` INT NOT NULL,
   `itemID` INT NOT NULL,
   `unit_price` DECIMAL(19,2) NOT NULL,
   `line_price` DECIMAL(19,2) NOT NULL,
+  PRIMARY KEY (`orderitemID`),
+  UNIQUE INDEX `orderitemID_UNIQUE` (`orderitemID` ASC) VISIBLE,
   INDEX `fk_Order_Items_Orders1_idx` (`orderID` ASC) VISIBLE,
   INDEX `fk_Order_Items_Items1_idx` (`itemID` ASC) VISIBLE,
   CONSTRAINT `fk_Order_Items_Orders1`
@@ -176,12 +179,12 @@ COMMIT;
 -- Data for table `Order_Items`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `Order_Items` (`quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (2, 1, 1, 18, 36);
-INSERT INTO `Order_Items` (`quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (2, 1, 2, 20, 40);
-INSERT INTO `Order_Items` (`quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (2, 2, 1, 18, 36);
-INSERT INTO `Order_Items` (`quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (2, 2, 2, 20, 40);
-INSERT INTO `Order_Items` (`quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (2, 3, 2, 20, 40);
-INSERT INTO `Order_Items` (`quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (2, 3, 3, 20, 40);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 1, 1, 18, 36);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 1, 2, 20, 40);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 2, 1, 18, 36);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 2, 2, 20, 40);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 3, 2, 20, 40);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 3, 3, 20, 40);
 
 COMMIT;
 
