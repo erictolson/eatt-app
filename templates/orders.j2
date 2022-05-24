@@ -135,40 +135,41 @@
         <form id="insertOrders" action="/orders" method="post">
             <legend><strong>Add Orders</strong></legend>
             <fieldset>
-                
-				<label for="ordertotal">Order Total:</label>
+
+                <label for="ordertotal">Order Total:</label>
                 <input type="number" class="form-control" id="ordertotal" name="ordertotal" placeholder="" required>
 
-				<label for="isdelivery">Delivery:</label>
-                <input type="number" class="form-control" id="isdelivery" name="isdelivery" placeholder="1 for yes, 0 for no" required>
+                <label for="isdelivery">Delivery:</label>
+                <input type="number" class="form-control" id="isdelivery" name="isdelivery"
+                    placeholder="1 for yes, 0 for no" required>
 
-				<label for="customerid">Customer ID:</label>
+                <label for="customerid">Customer ID:</label>
                 <select name="customerid" id="customerid" class="form-control" placeholder="" required>
                     {% set customerList = [] %}
                     <option value="None">None</option>
                     {% for item in customers if item.customerID not in customerList %}
-                    {{ customerList.append(item.name) }}
-                    <option value="{{ item.name }}">{{ item.name }}</option>
+                    {{ customerList.append(item.customerID) }}
+                    <option value="{{ item.customerID }}">{{ item.name }}</option>
                     {% endfor %}
                 </select>
 
-				<label for="driverid">Driver ID:</label>
+                <label for="driverid">Driver ID:</label>
                 <select name="driverid" id="driverid" class="form-control" placeholder="" required>
                     {% set driverList = [] %}
-					<option value="None">None</option>
+                    <option value="None">None</option>
                     {% for item in drivers if item.driverID not in driverList %}
-                    {{ driverList.append(item.name) }}
-                    <option value="{{item.name}}">{{ item.name }}</option>
+                    {{ driverList.append(item.driverID) }}
+                    <option value="{{ item.driverID }}">{{ item.name }}</option>
                     {% endfor %}
                 </select>
 
-				<label for="discountid">Discount ID:</label>
+                <label for="discountid">Discount ID:</label>
                 <select name="discountid" id="discountid" class="form-control" placeholder="" required>
                     {% set discountList = [] %}
-					<option value="None">None</option>
+                    <option value="None">None</option>
                     {% for item in discounts if item.discountID not in discountList %}
-                    {{ discountList.append(item.code) }}
-                    <option value="{{ item.code }}">{{ item.code }}</option>
+                    {{ discountList.append(item.discountID) }}
+                    <option value="{{ item.discountID }}">{{ item.code }}</option>
                     {% endfor %}
                 </select>
 
@@ -177,8 +178,7 @@
             </fieldset>
 
             <!-- Create 'Add Order' and 'Cancel' buttons -->
-            <input type="submit" value="Add Order" name="Add_Orders" class="btn btn-primary"
-                style="margin:.5rem;">
+            <input type="submit" value="Add Order" name="Add_Orders" class="btn btn-primary" style="margin:.5rem;">
             <input class="btn" type="button" value="Cancel" onClick="browseOrders()">
         </form>
     </div>

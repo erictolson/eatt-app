@@ -186,7 +186,7 @@ def edit_items(id):
 
 @app.route('/orders', methods=["GET", "POST"])
 def orders():
-     if request.method == "GET":
+    if request.method == "GET":
         query = "SELECT * FROM Orders;"
         cur = mysql.connection.cursor()
         cur.execute(query)
