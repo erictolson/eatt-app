@@ -30,7 +30,7 @@ def customers():
         data = cur.fetchall()
 
         return render_template("customers.j2", data=data)
-
+    
     if request.method == "POST":
         if request.form.get("search"):
             search = request.form["search"].lower()
@@ -188,7 +188,7 @@ def edit_items(id):
 @app.route('/order_items', methods=["GET", "POST"])
 def order_items():
     if request.method == "GET":
-        query = "SELECT orderID, itemID, unit_price, quantity, line_price FROM Order_Items;"
+        query = "SELECT orderitemID, orderID, Order_Items.itemID, Items.name, unit_price, quantity, line_price FROM Order_Items LEFT JOIN Items ON Order_Items.itemID = Items.itemID;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
@@ -197,11 +197,11 @@ def order_items():
 
     if request.method == "POST":
         if request.form.get("Add_Order_Items"):
-            orderID = request.form["orderID"]
-            itemID = request.form["itemID"]
-            unit_price = request.form["unit_price"]
+            orderID = request.form["order"]
+            itemID = request.form["item"]
+            unit_price = request.form["unitprice"]
             quantity = request.form["quantity"]
-            line_price = request.form["line_price"]
+            line_price = request.form["linetotal"]
 
             query = "INSERT INTO Order_Items (orderID, itemID, unit_price, quantity, line_price) VALUES (%s, %s, %s, %s, %s)"
             cur = mysql.connection.cursor()
@@ -239,4 +239,4 @@ def edit_order_items(id):
 # Listener
 # change the port number if deploying on the flip servers
 if __name__ == "__main__":
-    app.run(port=8659, debug=True)
+    app.run(port=1995, debug=True)
