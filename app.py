@@ -209,11 +209,7 @@ def orders():
         discount_data = cur.fetchall()
 
         return render_template("orders.j2", data=data, customers=customer_data, drivers=driver_data, discounts=discount_data)
-    
-   
-
-    
-
+        
 
 @app.route('/order_items', methods=["GET", "POST"])
 def order_items():
