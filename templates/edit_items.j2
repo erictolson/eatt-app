@@ -1,43 +1,42 @@
-
-   
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Edit Items</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Edit Items</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <div>
-        <table border="1" cellpadding="5"> 
+        <table border="1" cellpadding="5">
             <caption> Editing Item: </caption>
             <!-- Access data tuple passed from app.py -->
             {% if data %}
-                <thead>
-                    <tr>
-                        <!-- Iterate through each key in the first entry to get the column name -->
-                        {% for key in data[0].keys() %}
+            <thead>
+                <tr>
+                    <!-- Iterate through each key in the first entry to get the column name -->
+                    {% for key in data[0].keys() %}
 
-                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
-                        <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
-                        
-                        <!-- End of this for loop -->
-                        {% endfor %} 
-                    </tr>
+                    <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+                    <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
 
-                <tbody>
-                    <!-- Now, iterate through every item in data -->
-                    {% for item in data %}
-                    <tr>
-                        <!-- Then iterate through every key in the current item dictionary -->
-                        {% for key in item.keys() %}
-                        
-                        <!-- Create a <td> element with the value of that key in it -->
-                        <td>{{item[key]}}</td> {% endfor %} 
-                    </tr> 
-                    {% endfor %} 
-            {% endif %} 
+                    <!-- End of this for loop -->
+                    {% endfor %}
+                </tr>
+
+            <tbody>
+                <!-- Now, iterate through every item in data -->
+                {% for item in data %}
+                <tr>
+                    <!-- Then iterate through every key in the current item dictionary -->
+                    {% for key in item.keys() %}
+
+                    <!-- Create a <td> element with the value of that key in it -->
+                    <td>{{item[key]}}</td> {% endfor %}
+                </tr>
+                {% endfor %}
+                {% endif %}
         </table>
 
         <div id="edit">
@@ -47,20 +46,30 @@
                 <fieldset>
                     <!-- We can preset form inputs to match attributes currently stored for 'id' of person to be updated via value= and accessing our passed data tuple -->
                     <!-- Create hidden form input to store the passed 'id' of the person we are editing so we can access it easily in our 'POST' method in our app.py -->
-                    <input type="hidden" value="{{data[0].itemID}}" class="form-control" id="itemID" name="itemID" required>
+                    <input type="hidden" value="{{data[0].itemID}}" class="form-control" id="itemID" name="itemID"
+                        required>
 
-				    <label for="iname">Name:</label>
-				    <input type="text" class="form-control" id="iname" name="iname" " placeholder="{{data[0].name}}" required>
+                    <label for="iname">Name:</label>
+                    <input type="text" class="form-control" id="iname" name="iname" " value=" {{data[0].name}}"
+                        placeholder="" required>
 
-				    <label for="price">Price:</label>
-				    <input type="number" step="any" class="form-control" id="price" name="price" placeholder="{{data[0].price}}"  required>
-                
+                    <label for="price">Price:</label>
+                    <input type="number" step="any" class="form-control" id="price" name="price"
+                        value="{{data[0].price}}" placeholder="" required>
+
                 </fieldset>
                 <input type="submit" value="Edit Item" name="Edit_Item" class="btn btn-primary" style="margin:.5rem;">
-                <a href='/people'><input class="btn" type="button" value="cancel"></a>
+                <a href='/items'><input class="btn" type="button" value="Cancel"></a>
             </form>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
 </body>
+
 </html>

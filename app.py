@@ -265,7 +265,7 @@ def order_items():
 @app.route("/edit_order_items/<int:id>", methods=["GET", "POST"])
 def edit_order_items(id):
     if request.method == "GET":
-        query = "SELECT orderitemID, orderID, Order_Items.itemID, Items.name, unit_price, quantity, line_price FROM Order_Items LEFT JOIN Items ON Order_Items.itemID = Items.itemID WHERE orderID = %s" % (id)
+        query = "SELECT orderitemID, orderID, Order_Items.itemID, Items.name, unit_price, quantity, line_price FROM Order_Items LEFT JOIN Items ON Order_Items.itemID = Items.itemID WHERE orderitemID = %s" % (id)
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
