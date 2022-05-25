@@ -135,9 +135,17 @@ ENGINE = InnoDB;
 -- Data for table `Customers`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Eric', 'eric@gmail.com', 1111111111, '123 Eric St ');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Aaron', 'aaron@gmail.com', 222222222, '123 Aaron St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Jessica', 'Jessica@gmail.com', 333333333, '123 Jessica St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Eric', 'Eric@gmail.com', 3567852468, '123 Tolson St ');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Aaron', 'Aaron@gmail.com', 2547758911, '321 Trinh St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Jessica', 'Jessica@gmail.com', 3465447811, '555 Jessica St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Michael', 'Michael@gmail.com', 8956447901, '1469 Dunder St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Jim', 'Jim@gmail.com', 7633490023, '7435 Mifflin St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Pam', 'Pam@gmail.com', 2343376800, '1770 Paper St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Dwight', 'Dwight@gmail.com', 6557112043, '422 Company St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Stanley', 'Stanley@gmail.com', 9061243576, '900 Scranton St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Kevin', 'Kevin@gmail.com', 5711204468, '800 Wallace St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Phyllis', 'Phyllis@gmail.com', 4671109064, '2330 Limitless St');
+
 
 COMMIT;
 
@@ -149,6 +157,9 @@ START TRANSACTION;
 INSERT INTO `Discounts` (`discountID`, `code`, `percent_off`) VALUES (DEFAULT, '15off', 15);
 INSERT INTO `Discounts` (`discountID`, `code`, `percent_off`) VALUES (DEFAULT, 'spring', 5);
 INSERT INTO `Discounts` (`discountID`, `code`, `percent_off`) VALUES (DEFAULT, 'buy2', 50);
+INSERT INTO `Discounts` (`discountID`, `code`, `percent_off`) VALUES (DEFAULT, 'theoffice', 20);
+INSERT INTO `Discounts` (`discountID`, `code`, `percent_off`) VALUES (DEFAULT, 'boom', 10);
+INSERT INTO `Discounts` (`discountID`, `code`, `percent_off`) VALUES (DEFAULT, 'roasted', 10);
 
 COMMIT;
 
@@ -157,9 +168,14 @@ COMMIT;
 -- Data for table `Drivers`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Charlie');
-INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Mike');
+INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Ryan');
+INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Andy');
+INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Angela');
+INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Kelly');
+INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Toby');
+INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Creed');
 INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Oscar');
+INSERT INTO `Drivers` (`driverID`, `name`) VALUES (DEFAULT, 'Meredith');
 
 COMMIT;
 
@@ -171,6 +187,11 @@ START TRANSACTION;
 INSERT INTO `Items` (`itemID`, `name`, `price`) VALUES (DEFAULT, 'Crispy Chicken', 18);
 INSERT INTO `Items` (`itemID`, `name`, `price`) VALUES (DEFAULT, 'Yangnyeom Chicken', 20);
 INSERT INTO `Items` (`itemID`, `name`, `price`) VALUES (DEFAULT, 'Soy Garlic Chicken', 20);
+INSERT INTO `Items` (`itemID`, `name`, `price`) VALUES (DEFAULT, 'Garden Salad', 10);
+INSERT INTO `Items` (`itemID`, `name`, `price`) VALUES (DEFAULT, 'Side of Rice', 3);
+INSERT INTO `Items` (`itemID`, `name`, `price`) VALUES (DEFAULT, 'French Fries', 7);
+INSERT INTO `Items` (`itemID`, `name`, `price`) VALUES (DEFAULT, 'House Pickles', 5);
+INSERT INTO `Items` (`itemID`, `name`, `price`) VALUES (DEFAULT, 'Soda Can', 2);
 
 COMMIT;
 
@@ -185,6 +206,9 @@ INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit
 INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 2, 2, 20, 40);
 INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 3, 2, 20, 40);
 INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 2, 3, 3, 20, 40);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 1, 4, 3, 20, 20);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 1, 4, 4, 10, 10);
+INSERT INTO `Order_Items` (`orderitemID`, `quantity`, `orderID`, `itemID`, `unit_price`, `line_price`) VALUES (DEFAULT, 1, 5, 2, 20, 20);
 
 COMMIT;
 
@@ -196,6 +220,8 @@ START TRANSACTION;
 INSERT INTO `Orders` (`orderID`, `order_total`, `is_delivery`, `customerID`, `driverID`, `discountID`, `credit_card`) VALUES (DEFAULT, 64.6, 1, 1, 1, 1, 1111111111111111);
 INSERT INTO `Orders` (`orderID`, `order_total`, `is_delivery`, `customerID`, `driverID`, `discountID`, `credit_card`) VALUES (DEFAULT, 72.2, 0, 2, NULL, 2, 2222222222222222);
 INSERT INTO `Orders` (`orderID`, `order_total`, `is_delivery`, `customerID`, `driverID`, `discountID`, `credit_card`) VALUES (DEFAULT, 40, 1, 3, 3, 3, 3333333333333333);
+INSERT INTO `Orders` (`orderID`, `order_total`, `is_delivery`, `customerID`, `driverID`, `discountID`, `credit_card`) VALUES (DEFAULT, 30, 1, 5, 5, NULL, 4444444444444444);
+INSERT INTO `Orders` (`orderID`, `order_total`, `is_delivery`, `customerID`, `driverID`, `discountID`, `credit_card`) VALUES (DEFAULT, 18, 1, 4, 6, 5, 5555555555555555);
 
 COMMIT;
 
