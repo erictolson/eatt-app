@@ -135,16 +135,16 @@ ENGINE = InnoDB;
 -- Data for table `Customers`
 -- -----------------------------------------------------
 START TRANSACTION;
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Eric', 'Eric@gmail.com', 3567852468, '123 Tolson St ');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Aaron', 'Aaron@gmail.com', 2547758911, '321 Trinh St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Jessica', 'Jessica@gmail.com', 3465447811, '555 Jessica St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Michael', 'Michael@gmail.com', 8956447901, '1469 Dunder St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Jim', 'Jim@gmail.com', 7633490023, '7435 Mifflin St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Pam', 'Pam@gmail.com', 2343376800, '1770 Paper St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Dwight', 'Dwight@gmail.com', 6557112043, '422 Company St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Stanley', 'Stanley@gmail.com', 9061243576, '900 Scranton St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Kevin', 'Kevin@gmail.com', 5711204468, '800 Wallace St');
-INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Phyllis', 'Phyllis@gmail.com', 4671109064, '2330 Limitless St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Eric', 'eric@gmail.com', 3567852468, '123 Tolson St ');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Aaron', 'aaron@gmail.com', 2547758911, '321 Trinh St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Jessica', 'jessica@gmail.com', 3465447811, '555 Jessica St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Michael', 'michael@gmail.com', 8956447901, '1469 Dunder St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Jim', 'jim@gmail.com', 7633490023, '7435 Mifflin St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Pam', 'pam@gmail.com', 2343376800, '1770 Paper St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Dwight', 'dwight@gmail.com', 6557112043, '422 Company St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Stanley', 'stanley@gmail.com', 9061243576, '900 Scranton St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Kevin', 'kevin@gmail.com', 5711204468, '800 Wallace St');
+INSERT INTO `Customers` (`customerID`, `name`, `email`, `phone_num`, `address`) VALUES (DEFAULT, 'Phyllis', 'phyllis@gmail.com', 4671109064, '2330 Limitless St');
 
 
 COMMIT;
