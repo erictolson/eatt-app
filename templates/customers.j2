@@ -64,34 +64,35 @@
 </head>
 
 <body onload="browseCustomers()">
-	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">EATT Ordering</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/orders">Orders</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/customers">Customers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/drivers">Drivers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/items">Items</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/discounts">Discounts</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/order_items">Order Items</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">EATT Ordering</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/orders">Orders</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/customers">Customers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/drivers">Drivers</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/items">Items</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/discounts">Discounts</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/order_items">Order Items</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 	<h1>Browse Customers</h1>
 	<div>
 		<form action='/customers' method='post'>
@@ -101,10 +102,10 @@
 	</div>
 	<div id="browse">
 		<p><a href="#" onClick="newCustomers()">Add Customer</a> </p>
-			<!-- Access data tuple passed from app.py -->
-			{% if data %}
-			<table class="table table-sm table-striped">
-  				<thead class="thead-dark">
+		<!-- Access data tuple passed from app.py -->
+		{% if data %}
+		<table class="table table-sm table-striped">
+			<thead class="thead-dark">
 				<tr>
 					<!-- Iterate through each key in the first entry to get the column name -->
 					{% for key in data[0].keys() %}
@@ -176,8 +177,7 @@
 				<input type="text" class="form-control" id="cname" name="cname" placeholder="" required>
 
 				<label for="email">Email:</label>
-				<input type="email" class="form-control" id="email" name="email"
-					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="" required>
+				<input type="email" class="form-control" id="email" name="email" placeholder="" required>
 
 				<label for="phone">Phone Number:</label>
 				<input type="number" class="form-control" id="phone" name="phone" placeholder="" required>
