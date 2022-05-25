@@ -149,16 +149,6 @@ def items():
             return redirect("/items")
 
 
-@app.route("/delete_items/<int:id>")
-def delete_items(id):
-    query = "DELETE FROM Items WHERE itemID = '%s';"
-    cur = mysql.connection.cursor()
-    cur.execute(query, (id,))
-    mysql.connection.commit()
-
-    return redirect("/items")
-
-
 @app.route("/edit_items/<int:id>", methods=["POST", "GET"])
 def edit_items(id):
     if request.method == "GET":
