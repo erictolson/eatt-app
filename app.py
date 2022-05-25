@@ -218,10 +218,29 @@ def orders():
             discountID = request.form["discountid"]
             credit_card = request.form["creditcard"]
 
-            query = "INSERT INTO Orders (order_total, is_delivery, customerID, driverID, discountID, credit_card) VALUES (%s, %s, %s, %s, %s, %s)"
-            cur = mysql.connection.cursor()
-            cur.execute(query, (order_total, is_delivery, customerID, driverID, discountID, credit_card))
-            mysql.connection.commit()
+            if driverID == "None" and discountID == "None":
+                query = "INSERT INTO Orders (order_total, is_delivery, customerID, credit_card) VALUES (%s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (order_total, is_delivery, customerID, credit_card))
+                mysql.connection.commit()
+
+            elif driverID == "None":
+                query = "INSERT INTO Orders (order_total, is_delivery, customerID, discountID, credit_card) VALUES (%s, %s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (order_total, is_delivery, customerID, discountID, credit_card))
+                mysql.connection.commit()
+
+            elif discountID == "None":
+                query = "INSERT INTO Orders (order_total, is_delivery, customerID, driverID, credit_card) VALUES (%s, %s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (order_total, is_delivery, customerID, driverID, credit_card))
+                mysql.connection.commit()
+
+            else:
+                query = "INSERT INTO Orders (order_total, is_delivery, customerID, driverID, discountID, credit_card) VALUES (%s, %s, %s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (order_total, is_delivery, customerID, driverID, discountID, credit_card))
+                mysql.connection.commit()
 
             return redirect("/orders")
 
