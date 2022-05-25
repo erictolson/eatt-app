@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `Order_Items` (
   CONSTRAINT `fk_Order_Items_Items1`
     FOREIGN KEY (`itemID`)
     REFERENCES `Items` (`itemID`)
-    ON DELETE RESTRICT
+    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
