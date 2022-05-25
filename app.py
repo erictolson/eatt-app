@@ -318,5 +318,15 @@ def edit_order_items(id):
             return redirect("/order_items")
 
 
+@app.route("/delete_order_items/<int:id>")
+def delete_order_items(id):
+    query = "DELETE FROM Order_Items WHERE orderitemID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query, (id,))
+    mysql.connection.commit()
+
+    return redirect("/order_items")
+
+
 if __name__ == "__main__":
     app.run(port=8659, debug=True)
