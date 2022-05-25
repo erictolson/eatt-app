@@ -3,6 +3,15 @@ from flask_mysqldb import MySQL
 from flask import request
 import os
 import routes
+
+"""
+CITATIONS:
+The general structure of this program is based on the CS340 provided sample Flask App.
+Our references to it have been ongoing through the term
+https://github.com/osu-cs340-ecampus/flask-starter-app
+"""
+
+
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
@@ -233,6 +242,16 @@ def orders():
                 mysql.connection.commit()
 
             return redirect("/orders")
+
+
+@app.route("/delete_orders/<int:id>")
+def delete_orders(id):
+    query = "DELETE FROM Orders WHERE orderID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query, (id,))
+    mysql.connection.commit()
+
+    return redirect("/orders")
 
 
 @app.route('/order_items', methods=["GET", "POST"])

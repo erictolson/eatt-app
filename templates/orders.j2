@@ -123,9 +123,12 @@
                         <td> {{item[key]}} </td>
                         {% endfor %}
 
+                        <td><a href="delete_orders/{{item.orderID}}" class="btn btn-default">Delete</a></td>
+
                     </tr>
                     {% endfor %}
                     {% endif %}
+
             </table>
             <p>&nbsp;</p>
     </div>
