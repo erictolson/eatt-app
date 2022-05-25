@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `Order_Items` (
   CONSTRAINT `fk_Order_Items_Orders1`
     FOREIGN KEY (`orderID`)
     REFERENCES `Orders` (`orderID`)
-    ON DELETE RESTRICT
+    ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Order_Items_Items1`
     FOREIGN KEY (`itemID`)
