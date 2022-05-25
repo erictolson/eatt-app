@@ -2,7 +2,7 @@ from flask import Flask, render_template, json, redirect
 from flask_mysqldb import MySQL
 from flask import request
 import os
-
+import routes
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
