@@ -92,6 +92,7 @@
             </ul>
         </div>
     </nav>
+    <div class="container">
     <h1>Browse Orders</h1>
     <div id="browse">
         <p><a href="#" onClick="newOrders()">Add Orders</a> </p>
@@ -110,7 +111,7 @@
                         <!-- End of this for loop -->
                         {% endfor %}
                         <th></th>
-                        <th></th>
+                        
                     </tr>
 
                 <tbody>
@@ -140,11 +141,14 @@
             <fieldset>
 
                 <label for="ordertotal">Order Total:</label>
-                <input type="number" class="form-control" id="ordertotal" name="ordertotal" placeholder="" required>
+                <input type="number" step="any" class="form-control" id="ordertotal" name="ordertotal" placeholder="" required>
 
                 <label for="isdelivery">Delivery:</label>
-                <input type="number" class="form-control" id="isdelivery" name="isdelivery"
-                    placeholder="1 for yes, 0 for no" required>
+                <br>
+                <input type="radio" id="isdelivery" name="isdelivery" value=1>
+                <label for="isdelivery">Yes</label>
+                <input type="radio" id="isdelivery" name="isdelivery" value=0>
+                <label for="isdelivery">No</label><br>
 
                 <label for="customerid">Customer:</label>
                 <select name="customerid" id="customerid" class="form-control" placeholder="" required>
@@ -184,6 +188,7 @@
             <input type="submit" value="Add Order" name="Add_Orders" class="btn btn-primary" style="margin:.5rem;">
             <input class="btn" type="button" value="Cancel" onClick="browseOrders()">
         </form>
+    </div>
     </div>
 
 
