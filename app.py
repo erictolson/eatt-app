@@ -14,11 +14,11 @@ https://github.com/osu-cs340-ecampus/flask-starter-app
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
-app.config['MYSQL_USER'] = 'cs340_trinhaa'
-app.config['MYSQL_PASSWORD'] = '5478' #last 4 of onid
-app.config['MYSQL_DB'] = 'cs340_trinhaa'
-app.config['MYSQL_CURSORCLASS'] = "DictCursor"
+app.config['MYSQL_HOST'] = 
+app.config['MYSQL_USER'] = 
+app.config['MYSQL_PASSWORD'] = 
+app.config['MYSQL_DB'] = 
+app.config['MYSQL_CURSORCLASS'] = 
 
 
 mysql = MySQL(app)
